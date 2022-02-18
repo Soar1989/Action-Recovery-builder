@@ -10,27 +10,27 @@ on:
       MANIFEST_URL:
         description: 'MANIFEST_URL'
         required: true
-        default: 'https://github.com/SHRP/platform_manifest_twrp_omni.git'
+        default: 'https://github.com/minimal-manifest-twrp/platform_manifest_twrp_omni'
       MANIFEST_BRANCH:
         description: 'LIBRARY_BRANCH'
         required: true
-        default: 'v3_9.0'
+        default: 'twrp-9.0'
       DEVICE_TREE_URL:
         description: 'DEVICE_TREE_URL'
         required: true
-        default: 'https://github.com/affggh/android_device_oppo_a57'
+        default: 'https://gitlab.com/TipzTeam/oppo-msm8937/recovery_device_oppo_A57'
       DEVICE_TREE_BRANCH:
         description: 'DEVICE_TREE_BRANCH'
         required: true
-        default: 'shrp-9.0'
+        default: 'android-9.0'
       DEVICE_PATH:
         description: 'DEVICE_PATH'
         required: true
-        default: 'device/oppo/a57'
+        default: 'device/oppo/A57'
       DEVICE_NAME:
         description: 'DEVICE_NAME'
         required: true
-        default: 'a57'
+        default: 'A57'
 
 jobs:
   build:
@@ -93,6 +93,8 @@ jobs:
       run: |
         PATH=~/bin:$PATH
         cd ${{ steps.pwd.outputs.pwd }}
+        mkdir -p ./kernel/oppo
+        git clone https://gitlab.com/TipzTeam/oppo-msm8937/android_kernel_oppo_msm8937 -b lineage-18.1 kernel/oppo/msm8937
         export ALLOW_MISSING_DEPENDENCIES=true
         source build/envsetup.sh
         lunch ${{ github.event.inputs.MANIFEST_TYPE }}_${{ github.event.inputs.DEVICE_NAME }}-eng 
