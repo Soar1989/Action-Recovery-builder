@@ -94,7 +94,7 @@ jobs:
         PATH=~/bin:$PATH
         cd ${{ steps.pwd.outputs.pwd }}
         mkdir -p ./kernel/oppo
-        git clone https://gitlab.com/TipzTeam/oppo-msm8937/android_kernel_oppo_msm8937 -b lineage-18.1 kernel/oppo/msm8937
+        git clone --depth=1 https://gitlab.com/TipzTeam/oppo-msm8937/android_kernel_oppo_msm8937 -b lineage-18.1 kernel/oppo/msm8937
         export ALLOW_MISSING_DEPENDENCIES=true
         source build/envsetup.sh
         lunch ${{ github.event.inputs.MANIFEST_TYPE }}_${{ github.event.inputs.DEVICE_NAME }}-eng 
